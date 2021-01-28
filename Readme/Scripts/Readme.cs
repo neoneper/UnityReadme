@@ -14,7 +14,7 @@ namespace ReadmeSystem
         [HideInInspector]
         public bool loadedLayout = false;
         [HideInInspector]
-        public bool showInEditMode = true;
+        public bool showInEditMode = false;
         [HideInInspector]
         public bool isRoot = false;
 
