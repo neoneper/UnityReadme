@@ -13,8 +13,13 @@ Scene Object Readme:
 
 - Use this to organize important information about your project, such as: 
   - How to use tutorial;
+  
   - Link utils;
+  
   - Important information for the team; 
+  
+  - Hierarchy organizations with icons and informations about the GameObject
+  
   - etc..
 
 - Tested at Unity 2019.4+
