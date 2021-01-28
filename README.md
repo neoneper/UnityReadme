@@ -12,6 +12,8 @@ UnityReadme is a simple but functional system, allows you to add Readme in asset
   - Important information for the team; 
   - etc..
 
+- Tested at Unity 2019.4+
+
 # Features!
 ***
 - Allow HTML Tags at richText format;
