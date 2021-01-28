@@ -123,6 +123,9 @@ namespace ReadmeSystem.Editor
 
         public static void DrawHeaderGUI(Readme readme)
         {
+            if (readme == null)
+                return;
+
             var iconWidth = Mathf.Min(EditorGUIUtility.currentViewWidth / 3f - 20f, 128f);
 
             GUILayout.BeginHorizontal("In BigTitle");
@@ -137,6 +140,10 @@ namespace ReadmeSystem.Editor
 
         public static void DrawInspectorGUI(Readme readme)
         {
+            if (readme == null)
+                return;
+            if (readme.sections == null)
+                return;
 
             foreach (var section in readme.sections)
             {
