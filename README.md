@@ -4,7 +4,7 @@ UnityReadme is a simple but functional system, allows you to add Readme in asset
 
 Project Readme:
 
-![preview](https://i.gyazo.com/57d9dec3de48890b8c468e451c7cfd06.png)
+![preview](https://i.gyazo.com/57d69114f4d1d6b6c89ccf8b3ecbc36b.png)
 
 Scene Object Readme:
 
