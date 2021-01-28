@@ -73,3 +73,12 @@ phrase.
 
 ![behaviourgiff](https://i.gyazo.com/f96975c2cd206dbbe728a989571f5ca8.gif)
 
+# Show as Tutorial Action:
+***
+
+1 - Click at [Tutorial] Button at Unity Top Toolbar.
+2 - The Readme setted as Root, will be showed at inspector.
+
+# How to show automaticaly the project readme when project is launched!
+Simply mark some readme as (root) in editor mode. This will start it automatically when the project is opened.
+Remember to keep only one readme with this option active. If there is more than one readme with this option, the system should choose one at random.
