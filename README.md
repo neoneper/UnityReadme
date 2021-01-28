@@ -31,7 +31,9 @@ You can add as many reading files as you like, but only one should be used as th
 # How to create readme files:
 ***
 1 - RightClick at [Project - View];
+
 2 - Selec: Create->Readme, at context menu.
+
 3 - A Readme file will be created at some selected folder that you has selected, or at Assets.
 
 # How to edit readme files:
@@ -60,5 +62,12 @@ phrase.
 
 # How to add Reade to Scene Objects:
 ***
+1 - Create a readme in advance, following the previous tips.
+2 - Select some GameObject at Scene and add the componnent (Readme);
+3 - At the component, select a readme file to show here.
+4 - Uncheck the (Change Readme File) box.
+5 - Check (Change Readme File), if you want change the readme reference of this component.
+6 - Check/Unchek (Show icon in Hierarchy) option, to show or hide the hierarchy object readme icon.
 
+![behaviourgiff](https://i.gyazo.com/f96975c2cd206dbbe728a989571f5ca8.gif)
 
