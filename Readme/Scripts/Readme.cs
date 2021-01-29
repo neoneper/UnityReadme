@@ -35,7 +35,9 @@ namespace ReadmeSystem
 
             [HideInInspector]
             public string name;
-            public string heading, text, linkText, url;
+            public string heading;
+            [TextArea(5,255)] public string text;
+            public string linkText, url;
         }
     }
 }
