@@ -1,4 +1,6 @@
 # UnityReadme:
+UnityReadme is a simple but functional system, allows you to add Readme in asset format to the project and scene objects.
+
 This is intended to improve communication with the team working on the project and also to allow other team members who are not actively linked to the script but rather activities directly linked in the editor, such as Level-Designers, to help document the project and the components that it uses.
 
 In addition to helping to create visual points of interest through the hierarchy of unity.
