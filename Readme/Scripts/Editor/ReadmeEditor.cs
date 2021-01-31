@@ -15,7 +15,7 @@ namespace ReadmeSystem.Editor
     [InitializeOnLoad]
     public class ReadmeEditor : UnityEditor.Editor
     {
-
+        public bool showInEditMode = false;
         static string kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
 
         static float kSpace = 16f;
@@ -81,7 +81,7 @@ namespace ReadmeSystem.Editor
         {
             var readme = (Readme)target;
 
-            if (readme.showInEditMode)
+            if (showInEditMode)
             {
                 base.OnHeaderGUI();
                 return;
@@ -95,12 +95,12 @@ namespace ReadmeSystem.Editor
         {
             var readme = (Readme)target;
 
-            if (readme.showInEditMode)
+            if (showInEditMode)
             {
                 base.OnInspectorGUI();
 
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                readme.showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", readme.showInEditMode);
+                showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", showInEditMode);
                 readme.isRoot = EditorGUILayout.Toggle("Set as Root", readme.isRoot);
                 if (GUILayout.Button("Update Sections Label"))
                 {
@@ -115,7 +115,7 @@ namespace ReadmeSystem.Editor
 
                 DrawInspectorGUI(readme);
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                readme.showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", readme.showInEditMode);
+                showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", showInEditMode);
                 EditorGUILayout.EndHorizontal();
 
             }
