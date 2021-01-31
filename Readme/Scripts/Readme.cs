@@ -9,24 +9,10 @@ namespace ReadmeSystem
 
         public Texture2D icon;
         public string title;
-        public Section[] sections;
-
-        [HideInInspector]
-        public bool loadedLayout = false;
+        public Section[] sections;    
  
         [HideInInspector]
-        public bool isRoot = false;
-
-        [ContextMenu("SetRoot", true)]
-        public void SetIsRoot()
-        {
-            isRoot = true;
-        }
-        [ContextMenu("ResetRoot", true)]
-        public void ResetIsRoot()
-        {
-            isRoot = false;
-        }
+        public bool isRoot = false;        
 
         [Serializable]
         public class Section
@@ -35,7 +21,8 @@ namespace ReadmeSystem
             [HideInInspector]
             public string name;
             public string heading;
-            [TextArea(5,255)] public string text;
+            [TextArea(5,255)]
+            public string text;
             public string linkText, url;
         }
     }

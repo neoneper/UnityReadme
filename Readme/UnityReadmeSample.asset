@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: UnityReadmeSample
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 34f556d724b1bbf4097ca6220db2c581, type: 3}
+  title: UNITY README
+  sections:
+  - name: 'Text: UnityReadme...'
+    heading: 
+    text: "UnityReadme is a simple but functional system, allows you to add Readme
+      in asset format to the project and scene objects.\n\nThis is intended to improve
+      communication with the team working on the project and also to allow other
+      team members who are not actively linked to the script but rather activities
+      directly linked in the editor, such as Level-Designers, to help document the
+      project and the components that it uses.\n\nIn addition to helping to create
+      visual points of interest through the hierarchy of unity.\r"
+    linkText: 
+    url: 
+  - name: Header -<color="#...
+    heading: <color="#ffb300">WHY TO USE?</color>
+    text: 'Use this to organize important information about your project, such as:
+
+      -
+      How to use tutorial;
+
+      - Link utils;
+
+      - Important information for
+      the team;
+
+      - Hierarchy organizations with icons and informations about
+      the GameObject
+
+      - etc..'
+    linkText: 
+    url: 
+  - name: Header -Features!
+    heading: Features!
+    text: '- Allow HTML Tags at richText format;
+
+      - Project Readme: Auto Open
+      at project launch;
+
+      - Project Readme: Open with tutorial Button at unity
+      toolbar.
+
+      - Scene Objects Readme;
+
+      - Hierarchy icon to scene
+      objects readme;
+
+      - Field to URL adress.'
+    linkText: 
+    url: 
+  - name: Header -MORE ABOU...
+    heading: 'MORE ABOUT IT:'
+    text: '- Tutorials and source at:'
+    linkText: Unity Reade GitHub
+    url: https://github.com/neoneper/UnityReadme
+  loadedLayout: 1
+  isRoot: 1

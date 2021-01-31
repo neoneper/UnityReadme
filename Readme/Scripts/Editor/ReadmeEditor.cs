@@ -15,7 +15,8 @@ namespace ReadmeSystem.Editor
     [InitializeOnLoad]
     public class ReadmeEditor : UnityEditor.Editor
     {
-        public bool showInEditMode = false;
+        static bool showInEditMode = false;
+
         static string kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
 
         static float kSpace = 16f;
@@ -30,12 +31,10 @@ namespace ReadmeSystem.Editor
             if (!SessionState.GetBool(kShowedReadmeSessionStateName, false))
             {
                 var readme = SelectReadme();
-                SessionState.SetBool(kShowedReadmeSessionStateName, true);
-
-                if (readme && !readme.loadedLayout)
+                if (readme)
                 {
+                    SessionState.SetBool(kShowedReadmeSessionStateName, true);
                     LoadLayout();
-                    readme.loadedLayout = true;
                 }
             }
         }
@@ -51,31 +50,25 @@ namespace ReadmeSystem.Editor
         [MenuItem("Tutorial/Show Tutorial Instructions")]
         static Readme SelectReadme()
         {
-            var ids = AssetDatabase.FindAssets("Readme t:Readme");
-            Readme result = null;
+            showInEditMode = false;
 
-            foreach (string guid in ids)
+            Readme result = GetReadmeRoot();
+
+
+            if (result != null)
             {
-                var readmeObject = AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath(guid));
+                Selection.objects = new UnityEngine.Object[] { result };
 
-                Readme readme = (Readme)readmeObject;
-                if (readme.isRoot)
-                {
-                    Selection.objects = new UnityEngine.Object[] { readmeObject };
-                    result = (Readme)readmeObject;
-                    break;
-                }
             }
-
-            if (result == null)
+            else
             {
-                Debug.Log("Couldn't find a readme");
+                Debug.LogWarning("Couldn't find a readme");
             }
-
 
             return result;
 
         }
+
 
         protected override void OnHeaderGUI()
         {
@@ -90,7 +83,6 @@ namespace ReadmeSystem.Editor
             DrawHeaderGUI(readme);
         }
 
-
         public override void OnInspectorGUI()
         {
             var readme = (Readme)target;
@@ -101,24 +93,40 @@ namespace ReadmeSystem.Editor
 
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
                 showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", showInEditMode);
+
+                EditorGUI.BeginChangeCheck();
                 readme.isRoot = EditorGUILayout.Toggle("Set as Root", readme.isRoot);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    if (readme.isRoot)
+                    {
+                        Debug.Log("ResetAll");
+                        //Ensures that there is only one readme as root.
+                        ResetAllRootReadme();
+                        readme.isRoot = true;
+                    }
+                }
+
                 if (GUILayout.Button("Update Sections Label"))
                 {
                     ResetSectionsLabel(readme);
-                }
-                EditorGUILayout.EndHorizontal();
+                }            
+
+
+                EditorGUILayout.EndVertical();
+
+
+                //ImportOptions
+
 
                 return;
             }
-            else
-            {
 
-                DrawInspectorGUI(readme);
-                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-                showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", showInEditMode);
-                EditorGUILayout.EndHorizontal();
 
-            }
+            DrawInspectorGUI(readme);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", showInEditMode);
+            EditorGUILayout.EndHorizontal();
         }
 
         public static void DrawHeaderGUI(Readme readme)
@@ -137,7 +145,6 @@ namespace ReadmeSystem.Editor
             }
             GUILayout.EndHorizontal();
         }
-
         public static void DrawInspectorGUI(Readme readme)
         {
             if (readme == null)
@@ -153,10 +160,8 @@ namespace ReadmeSystem.Editor
 
                     GUILayout.Label(section.heading, ReadmeEditorStyles.HeadingStyle);
 
-                    if (section.heading != "")
-                    {
-                        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-                    }
+                    //Add Horizontal Bar
+                    if (section.heading != "") { EditorGUILayout.LabelField("", GUI.skin.horizontalSlider); }
                 }
                 if (!string.IsNullOrEmpty(section.text))
                 {
@@ -186,7 +191,10 @@ namespace ReadmeSystem.Editor
 
             }
         }
+        public static void DrawImport(Readme readme)
+        {
 
+        }
         private void ResetSectionsLabel(Readme readme)
         {
 
@@ -224,7 +232,50 @@ namespace ReadmeSystem.Editor
 
         }
 
+        static List<Readme> GetAllRootReadme()
+        {
+            var ids = AssetDatabase.FindAssets("Readme t:Readme");
+            List<Readme> results = new List<Readme>();
 
+            foreach (string guid in ids)
+            {
+                var readmeObject = AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath(guid));
+
+                Readme readme = (Readme)readmeObject;
+                if (readme.isRoot)
+                {
+                    results.Add(readme);
+
+                }
+            }
+
+
+
+            return results; ;
+        }
+        static Readme GetReadmeRoot()
+        {
+            Readme result = GetAllRootReadme().FirstOrDefault();
+            //Ensures that there is only one readme as root.
+            if (result != null)
+            {
+                ResetAllRootReadme();
+                result.isRoot = true;
+            }
+            return result;
+
+        }
+        static void ResetAllRootReadme()
+        {
+            foreach (Readme readme in GetAllRootReadme())
+            {
+                readme.isRoot = false;
+            }
+        }
     }
+
+
+
+
 
 }
