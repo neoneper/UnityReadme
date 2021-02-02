@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
 using System.IO;
 using System.Reflection;
 using System.Linq;
@@ -34,18 +32,10 @@ namespace ReadmeSystem.Editor
                 if (readme)
                 {
                     SessionState.SetBool(kShowedReadmeSessionStateName, true);
-                    LoadLayout();
                 }
             }
         }
-
-        static void LoadLayout()
-        {
-            var assembly = typeof(EditorApplication).Assembly;
-            var windowLayoutType = assembly.GetType("UnityEditor.WindowLayout", true);
-            var method = windowLayoutType.GetMethod("LoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
-            method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "Readme/Layout.wlt"), false });
-        }
+       
 
         [MenuItem("Tutorial/Show Tutorial Instructions")]
         static Readme SelectReadme()
@@ -110,7 +100,7 @@ namespace ReadmeSystem.Editor
                 if (GUILayout.Button("Update Sections Label"))
                 {
                     ResetSectionsLabel(readme);
-                }            
+                }
 
 
                 EditorGUILayout.EndVertical();
