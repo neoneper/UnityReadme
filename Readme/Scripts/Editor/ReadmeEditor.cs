@@ -13,6 +13,34 @@ namespace ReadmeSystem.Editor
     [InitializeOnLoad]
     public class ReadmeEditor : UnityEditor.Editor
     {
+
+        Readme readme { get { return (Readme)target; } }
+        string nextReadmeTitle
+        {
+            get
+            {
+                if (readme.nextReadme == null)
+                    return "Next";
+
+
+                return readme.nextReadme.title == "" ? "Next" : readme.nextReadme.title;
+            }
+        }
+
+        string prevReadmeTitle
+        {
+            get
+            {
+                if (readme.prevReadme == null)
+                    return "Prev";
+
+
+                return readme.prevReadme.title == "" ? "Prev" : readme.prevReadme.title;
+            }
+        }
+
+
+
         static bool showInEditMode = false;
 
         static string kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
@@ -35,7 +63,7 @@ namespace ReadmeSystem.Editor
                 }
             }
         }
-       
+
 
         [MenuItem("Tutorial/Show Tutorial Instructions")]
         static Readme SelectReadme()
@@ -102,13 +130,9 @@ namespace ReadmeSystem.Editor
                     ResetSectionsLabel(readme);
                 }
 
-
                 EditorGUILayout.EndVertical();
 
-
                 //ImportOptions
-
-
                 return;
             }
 
@@ -117,6 +141,26 @@ namespace ReadmeSystem.Editor
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             showInEditMode = EditorGUILayout.Toggle("Show in Edit Mode", showInEditMode);
             EditorGUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal(EditorStyles.toolbar);
+
+
+            GUI.enabled = readme.prevReadme != null;
+            if (GUILayout.Button(prevReadmeTitle, EditorStyles.toolbarButton))
+            {
+                Selection.objects = new UnityEngine.Object[] { readme.prevReadme };
+            }
+
+            GUI.enabled = readme.nextReadme != null;
+            if (GUILayout.Button(nextReadmeTitle, EditorStyles.toolbarButton))
+            {
+                Selection.objects = new UnityEngine.Object[] { readme.nextReadme };
+
+            }
+
+            GUI.enabled = true;
+
+            GUILayout.EndHorizontal();
         }
 
         public static void DrawHeaderGUI(Readme readme)

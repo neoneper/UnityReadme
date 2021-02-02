@@ -9,7 +9,11 @@ namespace ReadmeSystem
 
         public Texture2D icon;
         public string title;
-        public Section[] sections;    
+        public Readme prevReadme;
+        public Readme nextReadme;
+
+        public Section[] sections;
+       
  
         [HideInInspector]
         public bool isRoot = false;        
